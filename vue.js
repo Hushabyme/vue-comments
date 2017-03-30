@@ -12,6 +12,8 @@
 /*  */
 
 /**
+ * Convert a value to a string that is actually rendered.
+ *
  * 将值转换为实际呈现的字符串
  */
 function _toString (val) {
@@ -23,6 +25,9 @@ function _toString (val) {
 }
 
   /**
+   * Convert a input value to a number for persistence.
+   * If the conversion fails, return original string.
+   *
    * 创建一个 map，并且返回一个函数，该函数检查 key 是否在此 map 中
    */
   function makeMap (
@@ -40,6 +45,8 @@ function _toString (val) {
   }
 
 /**
+ * Make a map and return a function for checking if a key is in that map.
+ *
  * 将键入的值转换为持久的数字.
  * 如果转换失败，则返回原字符串
  */
@@ -49,11 +56,15 @@ function toNumber (val) {
 }
 
 /**
+ * Check if a tag is a built-in tag.
+ *
  * 检查标签是否为内置的标签
  */
 var isBuiltInTag = makeMap('slot,component', true);
 
 /**
+ * Remove an item from an array
+ *
  * 从数组中移除某一个元素
  */
 function remove (arr, item) {
@@ -66,6 +77,8 @@ function remove (arr, item) {
 }
 
 /**
+ * Check whether the object has the property.
+ *
  * 检查对象是否拥有该属性
  */
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -74,6 +87,8 @@ function hasOwn (obj, key) {
 }
 
 /**
+ * Check if value is primitive
+ *
  * 检查是否该值为原始类型
  */
 function isPrimitive (value) {
@@ -81,6 +96,8 @@ function isPrimitive (value) {
 }
 
 /**
+ * Create a cached version of a pure function.
+ *
  * 创建一个纯函数的缓存版本
  */
 function cached (fn) {
@@ -92,6 +109,8 @@ function cached (fn) {
 }
 
 /**
+ * Camelize a hyphen-delimited string.
+ *
  * 将使用 "-" 分隔的字符串转换成驼峰表示
  * 例如：'app-store' => 'appStore'
  */
@@ -101,6 +120,8 @@ var camelize = cached(function (str) {
 });
 
 /**
+ * Capitalize a string.
+ *
  * 转换字符串的首字母为大写
  * 例如： 'app' => 'App'
  */
@@ -109,6 +130,8 @@ var capitalize = cached(function (str) {
 });
 
 /**
+ * Hyphenate a camelCase string.
+ *
  * 连接一个驼峰命名的字符串
  */
 var hyphenateRE = /([^-])([A-Z])/g;
@@ -120,6 +143,8 @@ var hyphenate = cached(function (str) {
 });
 
 /**
+ * Simple bind, faster than native
+ *
  * 简化版的 bind，比原生方法处理的更快
  */
 function bind (fn, ctx) {

@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40d7e25e-18c6-40be-829c-fc2a23c86ee4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/internal/cached.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/internal/hasOwn.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/internal/isPrimitive.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/internal/makeMap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/internal/remove.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/internal/toNumber.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/internal/toString.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vue.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue.js" afterPath="$PROJECT_DIR$/vue.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,10 +20,10 @@
       <file leaf-file-name="vue.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-174">
-              <caret line="116" column="34" lean-forward="true" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="34" />
+            <state relative-caret-position="198">
+              <caret line="145" column="34" lean-forward="false" selection-start-line="145" selection-start-column="34" selection-end-line="145" selection-end-column="34" />
               <folding>
-                <marker date="1490874032534" expanded="true" signature="235898:235907" ph="..." />
+                <marker date="1490874628373" expanded="true" signature="236502:236511" ph="..." />
               </folding>
             </state>
           </provider>
@@ -84,8 +74,8 @@
         <option value="$PROJECT_DIR$/internal/toString.js" />
         <option value="$PROJECT_DIR$/internal/hasOwn.js" />
         <option value="$PROJECT_DIR$/internal/isPrimitive.js" />
-        <option value="$PROJECT_DIR$/vue.js" />
         <option value="$PROJECT_DIR$/internal/cached.js" />
+        <option value="$PROJECT_DIR$/vue.js" />
       </list>
     </option>
   </component>
@@ -255,15 +245,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1490869006800</updated>
-      <workItem from="1490869009263" duration="5297000" />
+      <workItem from="1490869009263" duration="5609000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5297000" />
+    <option name="totallyTimeSpent" value="5609000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1060" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15010571" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -411,10 +401,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vue.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-174">
-          <caret line="116" column="34" lean-forward="true" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="34" />
+        <state relative-caret-position="198">
+          <caret line="145" column="34" lean-forward="false" selection-start-line="145" selection-start-column="34" selection-end-line="145" selection-end-column="34" />
           <folding>
-            <marker date="1490874032534" expanded="true" signature="235898:235907" ph="..." />
+            <marker date="1490874628373" expanded="true" signature="236502:236511" ph="..." />
           </folding>
         </state>
       </provider>

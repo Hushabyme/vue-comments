@@ -1130,11 +1130,15 @@ function dependArray (value) {
  * Option overwriting strategies are functions that handle
  * how to merge a parent option value and a child option
  * value into the final value.
+ *
+ * 选项覆盖策略是函数，用于处理合并父级和子级的选项值进最终值
  */
 var strats = config.optionMergeStrategies;
 
 /**
  * Options with restrictions
+ *
+ * 限制的选项
  */
 {
   strats.el = strats.propsData = function (parent, child, vm, key) {
@@ -1150,6 +1154,8 @@ var strats = config.optionMergeStrategies;
 
 /**
  * Helper that recursively merges two data objects together.
+ *
+ * 这是一个助手，用于将两个数据对象递归合并在一起
  */
 function mergeData (to, from) {
   if (!from) { return to }
@@ -1170,6 +1176,8 @@ function mergeData (to, from) {
 
 /**
  * Data
+ *
+ * 数据
  */
 strats.data = function (
   parentVal,
@@ -1198,6 +1206,10 @@ strats.data = function (
     // merged result of both functions... no need to
     // check if parentVal is a function here because
     // it has to be a function to pass previous merges.
+
+    // 当 parentVal 和 childVal 都存在时，
+    // 我们需要返回一个函数，用于返回两个函数的合并结果...
+    // 不需要检查 parentVal 是否是这里的函数，因为它必须是一个函数来传递以前的合并。
     return function mergedDataFn () {
       return mergeData(
         childVal.call(this),
@@ -1224,6 +1236,8 @@ strats.data = function (
 
 /**
  * Hooks and props are merged as arrays.
+ *
+ * 钩子和属性都被作为数组合并在一起
  */
 function mergeHook (
   parentVal,
@@ -1248,6 +1262,9 @@ config._lifecycleHooks.forEach(function (hook) {
  * When a vm is present (instance creation), we need to do
  * a three-way merge between constructor options, instance
  * options and parent options.
+ *
+ * 资源
+ * 当 vm 存在(实例被创建)时，我们需要将构造函数选项、实例选项和父级选项三者合并起来
  */
 function mergeAssets (parentVal, childVal) {
   var res = Object.create(parentVal || null);
@@ -1265,6 +1282,10 @@ config._assetTypes.forEach(function (type) {
  *
  * Watchers hashes should not overwrite one
  * another, so we merge them as arrays.
+ *
+ * 监视者
+ *
+ * 监视者哈希值不应该相互覆盖，所以我们将它们合并为数组。
  */
 strats.watch = function (parentVal, childVal) {
   /* istanbul ignore if */
@@ -1287,6 +1308,8 @@ strats.watch = function (parentVal, childVal) {
 
 /**
  * Other object hashes.
+ *
+ * 其它对象的哈希值
  */
 strats.props =
 strats.methods =
@@ -1301,6 +1324,8 @@ strats.computed = function (parentVal, childVal) {
 
 /**
  * Default strategy.
+ *
+ * 默认策略
  */
 var defaultStrat = function (parentVal, childVal) {
   return childVal === undefined
@@ -1310,6 +1335,8 @@ var defaultStrat = function (parentVal, childVal) {
 
 /**
  * Validate component names
+ *
+ * 验证组件名是否为内置的标签
  */
 function checkComponents (options) {
   for (var key in options.components) {
@@ -1326,6 +1353,8 @@ function checkComponents (options) {
 /**
  * Ensure all props option syntax are normalized into the
  * Object-based format.
+ *
+ * 确保所有的属性语法是基于对象格式的规范
  */
 function normalizeProps (options) {
   var props = options.props;
@@ -1357,6 +1386,8 @@ function normalizeProps (options) {
 
 /**
  * Normalize raw function directives into object format.
+ *
+ * 将原始函数指令规范化为对象格式
  */
 function normalizeDirectives (options) {
   var dirs = options.directives;
@@ -1373,6 +1404,9 @@ function normalizeDirectives (options) {
 /**
  * Merge two option objects into a new one.
  * Core utility used in both instantiation and inheritance.
+ *
+ * 将两个选项对象合并为一个新的对象
+ * 用于实例化和继承的核心工具
  */
 function mergeOptions (
   parent,
@@ -1420,6 +1454,9 @@ function mergeOptions (
  * Resolve an asset.
  * This function is used because child instances need access
  * to assets defined in its ancestor chain.
+ *
+ * 解决一个资源
+ * 使用此函数是因为子实例需要访问其祖先链中定义的资源
  */
 function resolveAsset (
   options,
@@ -1469,10 +1506,13 @@ function validateProp (
     }
   }
   // check default value
+  // 检查默认值
   if (value === undefined) {
     value = getPropDefaultValue(vm, prop, key);
     // since the default value is a fresh copy,
+    // 一旦默认值是刚复制的值
     // make sure to observe it.
+    // 就要确保观察它
     var prevShouldConvert = observerState.shouldConvert;
     observerState.shouldConvert = true;
     observe(value);
@@ -1486,6 +1526,8 @@ function validateProp (
 
 /**
  * Get the default value of a prop.
+ *
+ * 获取属性的默认值
  */
 function getPropDefaultValue (vm, prop, key) {
   // no default, return undefined
@@ -1518,6 +1560,8 @@ function getPropDefaultValue (vm, prop, key) {
 
 /**
  * Assert whether a prop is valid.
+ *
+ * 断言属性是否有效
  */
 function assertProp (
   prop,
@@ -1571,6 +1615,8 @@ function assertProp (
 
 /**
  * Assert the type of a value
+ *
+ * 断言值的类型
  */
 function assertType (value, type) {
   var valid;

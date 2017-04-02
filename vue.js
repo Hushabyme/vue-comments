@@ -163,6 +163,8 @@ function bind (fn, ctx) {
 
 /**
  * Convert an Array-like object to a real Array.
+ *
+ * 转换一个类数组对象为真正的数组
  */
 function toArray (list, start) {
   start = start || 0;
@@ -176,6 +178,8 @@ function toArray (list, start) {
 
 /**
  * Mix properties into target object.
+ *
+ * 将属性混合到目标对象中
  */
 function extend (to, _from) {
   for (var key in _from) {
@@ -188,6 +192,9 @@ function extend (to, _from) {
  * Quick object check - this is primarily used to tell
  * Objects from primitive values when we know the value
  * is a JSON-compliant type.
+ *
+ * 简单的对象检查 - 当我们知道该值符合 JSON 规定的类型时，
+ * 可用于基础地使用去分辨是一个对象还是一个原始类型
  */
 function isObject (obj) {
   return obj !== null && typeof obj === 'object'
@@ -196,6 +203,8 @@ function isObject (obj) {
 /**
  * Strict object type check. Only returns true
  * for plain JavaScript objects.
+ *
+ * 严格的对象检查 - 只有当对象是纯对象(纯对象就是 {} 形式的对象)时才返回 true
  */
 var toString = Object.prototype.toString;
 var OBJECT_STRING = '[object Object]';
@@ -205,6 +214,8 @@ function isPlainObject (obj) {
 
 /**
  * Merge an Array of Objects into a single Object.
+ *
+ * 将数组中的对象合并到一个对象中
  */
 function toObject (arr) {
   var res = {};
@@ -218,21 +229,29 @@ function toObject (arr) {
 
 /**
  * Perform no operation.
+ *
+ * 不执行任何操作。
  */
 function noop () {}
 
 /**
  * Always return false.
+ *
+ * 总是返回 false，用于替代 `false`
  */
 var no = function () { return false; };
 
 /**
  * Return same value
+ *
+ * 返回同一个值
  */
 var identity = function (_) { return _; };
 
 /**
  * Generate a static keys string from compiler modules.
+ *
+ * 从编译器模块生成静态密钥字符串
  */
 function genStaticKeys (modules) {
   return modules.reduce(function (keys, m) {
@@ -243,6 +262,9 @@ function genStaticKeys (modules) {
 /**
  * Check if two values are loosely equal - that is,
  * if they are plain objects, do they have the same shape?
+ *
+ * 检查两个值是否为松散相等 - 也就是说，是否它们都为长相一样的纯对象。
+ * 比如 {a: 1, b: 2} 和 {b: 2, a: 1} 就不一样
  */
 function looseEqual (a, b) {
   var isObjectA = isObject(a);
@@ -265,6 +287,8 @@ function looseIndexOf (arr, val) {
 
 /**
  * Ensure a function is called only once.
+ *
+ * 确保只被调用一次函数
  */
 function once (fn) {
   var called = false;
@@ -281,74 +305,112 @@ function once (fn) {
 var config = {
   /**
    * Option merge strategies (used in core/util/options)
+   *
+   * 自定义合并策略选项（在 core / util / options 中使用）
+   * 用于全局的 Vue 的 Vue.config.optionMergeStrategies 方法调用
+   * 见[optionMergeStrategies](https://cn.vuejs.org/v2/api/#optionMergeStrategies)
    */
   optionMergeStrategies: Object.create(null),
 
   /**
    * Whether to suppress warnings.
+   *
+   * 取消 Vue 所有的日志与警告
+   * 用于全局的 Vue 的 Vue.config.silent 方法调用
+   * [silent](https://cn.vuejs.org/v2/api/#silent)
    */
   silent: false,
 
   /**
    * Show production mode tip message on boot?
+   *
+   * 是否在启动时显示生产模式提示消息
    */
   productionTip: "development" !== 'production',
 
   /**
    * Whether to enable devtools
+   *
+   * 配置是否允许 vue-devtools 检查代码。开发版本默认为 true，生产版本默认为 false。
+   * [devtools](https://cn.vuejs.org/v2/api/#devtools)
    */
   devtools: "development" !== 'production',
 
   /**
    * Whether to record perf
+   *
+   * 是否记录表现
    */
   performance: "development" !== 'production',
 
   /**
    * Error handler for watcher errors
+   *
+   * 观察者错误的错误处理程序
+   * [errorHandler](https://cn.vuejs.org/v2/api/#errorHandler)
    */
   errorHandler: null,
 
   /**
    * Ignore certain custom elements
+   *
+   * 忽略某些自定义元素
+   * (ignoredElements)[https://cn.vuejs.org/v2/api/#ignoredElements]
    */
   ignoredElements: [],
 
   /**
    * Custom user key aliases for v-on
+   *
+   * 给 v-on 自定义键位别名
+   * (keyCodes)[https://cn.vuejs.org/v2/api/#keyCodes]
    */
   keyCodes: Object.create(null),
 
   /**
    * Check if a tag is reserved so that it cannot be registered as a
    * component. This is platform-dependent and may be overwritten.
+   *
+   * 检查标签是否被保留，使其不能被注册为组件。这与平台有关，可能会被覆盖。
    */
   isReservedTag: no,
 
   /**
    * Check if a tag is an unknown element.
    * Platform-dependent.
+   *
+   * 检查标签是否是未知元素。
+   * 依赖于平台
    */
   isUnknownElement: no,
 
   /**
    * Get the namespace of an element
+   *
+   * 获取一个元素的空间命名
    */
   getTagNamespace: noop,
 
   /**
    * Parse the real tag name for the specific platform.
+   *
+   * 为特定的平台解析真实的标签名
    */
   parsePlatformTagName: identity,
 
   /**
    * Check if an attribute must be bound using property, e.g. value
    * Platform-dependent.
+   *
+   * 检查属性是否必须使用属性绑定。
+   * 依赖于平台
    */
   mustUseProp: no,
 
   /**
    * List of asset types that a component can own.
+   *
+   * 一个组件可以拥有的静态资源类型列表
    */
   _assetTypes: [
     'component',
@@ -358,6 +420,8 @@ var config = {
 
   /**
    * List of lifecycle hooks.
+   *
+   * 组件生命周期的列表(共 10 个)
    */
   _lifecycleHooks: [
     'beforeCreate',
@@ -374,17 +438,22 @@ var config = {
 
   /**
    * Max circular updates allowed in a scheduler flush cycle.
+   *
+   * 调度器刷新周期允许最大循环更新
    */
   _maxUpdateCount: 100
 };
 
 /*  */
 /* globals MutationObserver */
+/* 全局 MutationObserver */
 
 // can we use __proto__?
+// 可以使用 __proto__ 吗？
 var hasProto = '__proto__' in {};
 
 // Browser environment sniffing
+// 浏览器判断
 var inBrowser = typeof window !== 'undefined';
 var UA = inBrowser && window.navigator.userAgent.toLowerCase();
 var isIE = UA && /msie|trident/.test(UA);
@@ -395,14 +464,20 @@ var isIOS = UA && /iphone|ipad|ipod|ios/.test(UA);
 var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
 
 // this needs to be lazy-evaled because vue may be required before
+// 这需要懒惰评估，因为之前可能需要vue
+
 // vue-server-renderer can set VUE_ENV
+// vue-server-renderer 可以设置 VUE_ENV
 var _isServer;
 var isServerRendering = function () {
   if (_isServer === undefined) {
     /* istanbul ignore if */
     if (!inBrowser && typeof global !== 'undefined') {
       // detect presence of vue-server-renderer and avoid
+      // 检测到vue-server-renderer的存在并避免
+
       // Webpack shimming the process
+      // Webpack process 整理
       _isServer = global['process'].env.VUE_ENV === 'server';
     } else {
       _isServer = false;
@@ -412,6 +487,7 @@ var isServerRendering = function () {
 };
 
 // detect devtools
+// 检测 devtools
 var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
 
 /* istanbul ignore next */
@@ -425,6 +501,9 @@ var hasSymbol =
 
 /**
  * Defer a task to execute it asynchronously.
+ *
+ * 延迟任务并以异步方式执行
+ * (Vue.nextTick)[https://cn.vuejs.org/v2/api/#Vue-nextTick]
  */
 var nextTick = (function () {
   var callbacks = [];
@@ -446,6 +525,13 @@ var nextTick = (function () {
   // UIWebView in iOS >= 9.3.3 when triggered in touch event handlers. It
   // completely stops working after triggering a few times... so, if native
   // Promise is available, we will use it:
+
+  // nextTick 行为利用可以用于访问的微任务队列
+  // 通过原生的 Promise.then 方法或 MutationObserver
+  // MutationObserver 拥有更广泛的支持，但是它在 iOS >= 9.3.3 中触发触摸事件时会有严重的 BUG
+  // 该 BUG 是在触发几次事件后会停止工作
+  // 所以如果原生的 Promise 可用，那么下面就使用它：
+
   /* istanbul ignore if */
   if (typeof Promise !== 'undefined' && isNative(Promise)) {
     var p = Promise.resolve();
@@ -457,15 +543,24 @@ var nextTick = (function () {
       // microtask queue but the queue isn't being flushed, until the browser
       // needs to do some other work, e.g. handle a timer. Therefore we can
       // "force" the microtask queue to be flushed by adding an empty timer.
+
+      // 在有问题的 UIWebViews 中，Promise.then 不会完全中断，但是
+      // 它可以卡在一个奇怪的状态，回调被推入微任务队列，但队列没有被刷新，
+      // 直到浏览器需要做一些其他工作，例如 处理定时器
+      // 所以我们可以通过添加一个空的定时器“强制”微任务队列被刷新。
       if (isIOS) { setTimeout(noop); }
     };
   } else if (typeof MutationObserver !== 'undefined' && (
     isNative(MutationObserver) ||
     // PhantomJS and iOS 7.x
+    // PhantomJS 和 iOS 7.x 中
     MutationObserver.toString() === '[object MutationObserverConstructor]'
   )) {
     // use MutationObserver where native Promise is not available,
+    // 使用 MutationObserver 当原生的 Promise 不可使用时
+
     // e.g. PhantomJS IE11, iOS7, Android 4.4
+    // 例如：在 PhantomJS IE11, iOS7, Android 4.4 中
     var counter = 1;
     var observer = new MutationObserver(nextTickHandler);
     var textNode = document.createTextNode(String(counter));
@@ -506,9 +601,11 @@ var _Set;
 /* istanbul ignore if */
 if (typeof Set !== 'undefined' && isNative(Set)) {
   // use native Set when available.
+  // 当可以使用时，使用原生的 Set
   _Set = Set;
 } else {
   // a non-standard Set polyfill that only works with primitive keys.
+  // 这不是标准的 Set polyfill，它仅在 key 为原始类型(String / Number)时才会生效
   _Set = (function () {
     function Set () {
       this.set = Object.create(null);
@@ -537,11 +634,13 @@ var perf;
 }
 
 /*  */
-
+// 冻结一个对象
 var emptyObject = Object.freeze({});
 
 /**
  * Check if a string starts with $ or _
+ *
+ * 检查字符串是否为 $ 或 _
  */
 function isReserved (str) {
   var c = (str + '').charCodeAt(0);
@@ -550,6 +649,8 @@ function isReserved (str) {
 
 /**
  * Define a property.
+ *
+ * 定义一个属性
  */
 function def (obj, key, val, enumerable) {
   Object.defineProperty(obj, key, {
@@ -562,6 +663,8 @@ function def (obj, key, val, enumerable) {
 
 /**
  * Parse simple path.
+ *
+ * 解析简单的路径
  */
 var bailRE = /[^\w.$]/;
 function parsePath (path) {
@@ -579,6 +682,10 @@ function parsePath (path) {
   }
 }
 
+/**
+* 控制台消息
+*
+* */
 var warn = noop;
 var tip = noop;
 var formatComponentName;
@@ -590,6 +697,7 @@ var formatComponentName;
     .replace(classifyRE, function (c) { return c.toUpperCase(); })
     .replace(/[-_]/g, ''); };
 
+  // 控制台 warning
   warn = function (msg, vm) {
     if (hasConsole && (!config.silent)) {
       console.error("[Vue warn]: " + msg + " " + (
@@ -598,6 +706,7 @@ var formatComponentName;
     }
   };
 
+  // 控制台 tip
   tip = function (msg, vm) {
     if (hasConsole && (!config.silent)) {
       console.warn("[Vue tip]: " + msg + " " + (
@@ -642,6 +751,8 @@ var uid$1 = 0;
 /**
  * A dep is an observable that can have multiple
  * directives subscribing to it.
+ *
+ * dep 是一个可观察的类，它可以拥有许多指令订阅它
  */
 var Dep = function Dep () {
   this.id = uid$1++;
@@ -664,6 +775,7 @@ Dep.prototype.depend = function depend () {
 
 Dep.prototype.notify = function notify () {
   // stablize the subscriber list first
+  // 首先稳定订阅者
   var subs = this.subs.slice();
   for (var i = 0, l = subs.length; i < l; i++) {
     subs[i].update();
@@ -673,6 +785,10 @@ Dep.prototype.notify = function notify () {
 // the current target watcher being evaluated.
 // this is globally unique because there could be only one
 // watcher being evaluated at any time.
+
+// 当前正在评估的目标观察者
+// 这是全局唯一的，因为它只能有一个
+// 观察者随时进行评估
 Dep.target = null;
 var targetStack = [];
 
@@ -688,10 +804,13 @@ function popTarget () {
 /*
  * not type checking this file because flow doesn't play well with
  * dynamically accessing methods on Array prototype
+ *
+ * 没有类型检查此文件，因为在 Array 原型上动态访问方法不能很好地运行
  */
 
 var arrayProto = Array.prototype;
-var arrayMethods = Object.create(arrayProto);[
+var arrayMethods = Object.create(arrayProto);
+[
   'push',
   'pop',
   'shift',
@@ -702,6 +821,7 @@ var arrayMethods = Object.create(arrayProto);[
 ]
 .forEach(function (method) {
   // cache original method
+  // 存储原始的方法
   var original = arrayProto[method];
   def(arrayMethods, method, function mutator () {
     var arguments$1 = arguments;
@@ -743,6 +863,10 @@ var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
  * also converted to become reactive. However when passing down props,
  * we don't want to force conversion because the value may be a nested value
  * under a frozen data structure. Converting it would defeat the optimization.
+ *
+ * 默认情况下，当设置一个无效属性时，新值也会被转换为有效地。
+ * 然而，当传入属性时，我们不希望强制转换，因为该值也许是在冻结的数据结构中的一个嵌套值
+ * 如果转换它将可能会打败优化
  */
 var observerState = {
   shouldConvert: true,
@@ -754,6 +878,10 @@ var observerState = {
  * object. Once attached, the observer converts target
  * object's property keys into getter/setters that
  * collect dependencies and dispatches updates.
+ *
+ * 一个观察者类，它依附于每个被观察的对象上。
+ * 一旦附加上，该观察者会转换目标对象上的属性键为 getter/setters，
+ * 目的是为了收集依赖关系并发送更新
  */
 var Observer = function Observer (value) {
   this.value = value;
@@ -775,6 +903,9 @@ var Observer = function Observer (value) {
  * Walk through each property and convert them into
  * getter/setters. This method should only be called when
  * value type is Object.
+ *
+ * 遍历每一个属性并且将其转化为 getter/setters。
+ * 当 value 的类型为 Object 时，这个方法才应该被调用
  */
 Observer.prototype.walk = function walk (obj) {
   var keys = Object.keys(obj);
@@ -785,6 +916,8 @@ Observer.prototype.walk = function walk (obj) {
 
 /**
  * Observe a list of Array items.
+ *
+ * 观察数组项的列表
  */
 Observer.prototype.observeArray = function observeArray (items) {
   for (var i = 0, l = items.length; i < l; i++) {
@@ -797,6 +930,8 @@ Observer.prototype.observeArray = function observeArray (items) {
 /**
  * Augment an target Object or Array by intercepting
  * the prototype chain using __proto__
+ *
+ * 增加一个目标 Object 或 Array，通过使用 __proto__ 拦截原型链
  */
 function protoAugment (target, src) {
   /* eslint-disable no-proto */
@@ -807,6 +942,8 @@ function protoAugment (target, src) {
 /**
  * Augment an target Object or Array by defining
  * hidden properties.
+ *
+ * 增加一个目标 Object 或 Array，通过定义隐藏属性
  */
 /* istanbul ignore next */
 function copyAugment (target, src, keys) {
@@ -820,6 +957,10 @@ function copyAugment (target, src, keys) {
  * Attempt to create an observer instance for a value,
  * returns the new observer if successfully observed,
  * or the existing observer if the value already has one.
+ *
+ * 尝试为值创建一个观察器实例，
+ * 如果成功的被观察到，则返回新的观察者，
+ * 否则如果已经存在一个 value，则返回存在的观察者
  */
 function observe (value, asRootData) {
   if (!isObject(value)) {
@@ -845,6 +986,8 @@ function observe (value, asRootData) {
 
 /**
  * Define a reactive property on an Object.
+ *
+ * 在 Object 中定义一个反应属性
  */
 function defineReactive$$1 (
   obj,
@@ -860,6 +1003,7 @@ function defineReactive$$1 (
   }
 
   // cater for pre-defined getter/setters
+  // 满足预定义 getter/setters 的需要
   var getter = property && property.get;
   var setter = property && property.set;
 
@@ -905,6 +1049,9 @@ function defineReactive$$1 (
  * Set a property on an object. Adds the new property and
  * triggers change notification if the property doesn't
  * already exist.
+ *
+ * 设置一个对象的一个属性。
+ * 添加新的属性，并且如果属性不存在则触发更改通知
  */
 function set (obj, key, val) {
   if (Array.isArray(obj)) {
@@ -935,6 +1082,8 @@ function set (obj, key, val) {
 
 /**
  * Delete a property and trigger change if necessary.
+ *
+ * 如果需要，删除一个属性并触发改变
  */
 function del (obj, key) {
   if (Array.isArray(obj)) {
@@ -945,7 +1094,7 @@ function del (obj, key) {
   if (obj._isVue || (ob && ob.vmCount)) {
     "development" !== 'production' && warn(
       'Avoid deleting properties on a Vue instance or its root $data ' +
-      '- just set it to null.'
+    '- just set it to null.'
     );
     return
   }
@@ -962,6 +1111,8 @@ function del (obj, key) {
 /**
  * Collect dependencies on array elements when the array is touched, since
  * we cannot intercept array element access like property getters.
+ *
+ * 当数组被获取时收集对数组元素的依赖，因为我们不能拦截数组元素访问，比如属性 getter。
  */
 function dependArray (value) {
   for (var e = (void 0), i = 0, l = value.length; i < l; i++) {

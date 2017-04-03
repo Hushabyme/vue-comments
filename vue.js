@@ -1646,6 +1646,7 @@ function assertType (value, type) {
  * Use function string name to check built-in types,
  * because a simple equality check will fail when running
  * across different vms / iframes.
+ *
  */
 function getType (fn) {
   var match = fn && fn.toString().match(/^\s*function (\w+)/);

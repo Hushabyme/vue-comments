@@ -1647,6 +1647,9 @@ function assertType (value, type) {
  * because a simple equality check will fail when running
  * across different vms / iframes.
  *
+ * 使用函数字符串名称检查内置类型，
+ * 因为当在不同的 vms / iframes 中运行时，一个简单的相等检查会失败
+ *
  */
 function getType (fn) {
   var match = fn && fn.toString().match(/^\s*function (\w+)/);
@@ -1683,6 +1686,7 @@ function handleError (err, vm, type) {
 }
 
 /* not type checking this file because flow doesn't play well with Proxy */
+/* 不是键入检查此文件，因为流不能很好地与代理相容 */
 
 var initProxy;
 
@@ -1790,6 +1794,7 @@ var VNode = function VNode (
 var prototypeAccessors = { child: {} };
 
 // DEPRECATED: alias for componentInstance for backwards compat.
+// 不建议：用于向后兼容的 componentInstance 的别名
 /* istanbul ignore next */
 prototypeAccessors.child.get = function () {
   return this.componentInstance
@@ -1812,6 +1817,10 @@ function createTextVNode (val) {
 // used for static nodes and slot nodes because they may be reused across
 // multiple renders, cloning them avoids errors when DOM manipulations rely
 // on their elm reference.
+
+// 优化浅克隆
+// 用于静态节点和插槽节点，因为它们可能被重用
+// 于多个渲染，克隆它们避免了 DOM 操作所依赖它们的元素引用的错误
 function cloneVNode (vnode) {
   var cloned = new VNode(
     vnode.tag,
@@ -1862,6 +1871,7 @@ function createFnInvoker (fns) {
       }
     } else {
       // return handler return value for single handlers
+      // 返回单个管理者管理的返回值
       return fns.apply(null, arguments)
     }
   }
@@ -1941,15 +1951,26 @@ function mergeVNodeHook (def, hookKey, hook) {
 // The template compiler attempts to minimize the need for normalization by
 // statically analyzing the template at compile time.
 //
+// 模板编译企图最小化规范化的需求通过在编译时进行静态分析模板
+
 // For plain HTML markup, normalization can be completely skipped because the
 // generated render function is guaranteed to return Array<VNode>. There are
 // two cases where extra normalization is needed:
+//
+// 对于纯 HTML 模板，规范可以完全跳过因为生成渲染的函数确保返回 Array<VNode>。
+// 这是在额外的标准化所需求的两种方案
 
 // 1. When the children contains components - because a functional component
 // may return an Array instead of a single root. In this case, just a simple
 // normalization is needed - if any child is an Array, we flatten the whole
 // thing with Array.prototype.concat. It is guaranteed to be only 1-level deep
 // because functional components already normalize their own children.
+
+// 1. 当子代包含组件时 - 由于一个函数组件可能返回一个 Array 来替代单个根元素。
+// 在这种情况下，只需要简单的规范化就可以 - 如果任意子代是一个 Array，
+// 我们就将该 Array 使用 Array#concat 进行扁平化处理。
+// 这样就可以确保只有一级的深度，因为函数组件已经标准化了它们自己的子代
+
 function simpleNormalizeChildren (children) {
   for (var i = 0; i < children.length; i++) {
     if (Array.isArray(children[i])) {
@@ -1963,6 +1984,11 @@ function simpleNormalizeChildren (children) {
 // e.g. <template>, <slot>, v-for, or when the children is provided by user
 // with hand-written render functions / JSX. In such cases a full normalization
 // is needed to cater to all possible types of children values.
+
+// 2. 当子代包含了构造，即总是生成嵌套数组，
+// 例如：<template>, <slot>, v-for 或当子代是使用用户手写的渲染函数或 JSX 所提供的情况。
+// 在这种情况下，一个完全的标准化就需要注意所有子代的值可能的的类型。
+
 function normalizeChildren (children) {
   return isPrimitive(children)
     ? [createTextVNode(children)]
@@ -1986,6 +2012,7 @@ function normalizeArrayChildren (children, nestedIndex) {
         last.text += String(c);
       } else if (c !== '') {
         // convert primitive to vnode
+        // 将原始类型为 vnode
         res.push(createTextVNode(c));
       }
     } else {
@@ -2023,6 +2050,7 @@ function initEvents (vm) {
 
 var target;
 
+// once$$1 -> 前缀为 '~'
 function add (event, fn, once$$1) {
   if (once$$1) {
     target.$once(event, fn);
